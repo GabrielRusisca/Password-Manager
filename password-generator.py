@@ -1,4 +1,25 @@
-import random as rd
+from numbers import Number
+import os, random as rd
+
+try: # Teste para implementar randomizações mais protegidas
+  d = {}
+  for i in range(1000):
+    a = os.urandom(1)
+    c = int.from_bytes(a, 'big')
+    d.setdefault(c,0)
+    d[c] += 1
+  cont = 0
+  for k,v in d.items():
+    if v > 2:
+      cont += 1
+      #print(k,v)
+    if k < 20:
+      print(k, v)
+  print('cont = ', cont)
+  print('len =', len(d))
+  
+except:
+  print('caca')
 
 def truefalse(txt: str) -> int:
     """Representa True e False como 1 e 0"""
@@ -22,8 +43,9 @@ def definicoesSenha() -> dict:
     }
   return dS
 
-def numChrCategoria(d: dict = definicoesSenha()) -> dict:
+def numChrCategoria() -> dict:
   """Separa a quantos caractéres cada categoria da senha possuirá"""
+  d: dict = definicoesSenha()
   numCategSenha: int = 0   
   for v in d.values():
     numCategSenha += v
@@ -51,10 +73,11 @@ def rdCaractere(start : int, stop : int) -> str:
   '''Escolhe um caractere aleatoriamente de acordo com seu valor decimal na tabela ASCII'''
   return chr(rd.randint(start, stop))
 
-def passWord(d : dict = numChrCategoria()) -> str:
+def passWord() -> str:
   """Gerador de senhas
   É possível especificar o tamanho da senha, se há números (48 a 57), letras maiúsculas (65 a 90) ou minúsculas (97 a 122) e caracteres especiais (33 a 47, 58 a 64, 91 a 96 e 123 a 126).
   Valores entre parênteses são os intervalos em que se encontram os caracters na tabela ASCII."""
+  d : dict = numChrCategoria()
   dAscii: dict = {'maiusculas': (65, 90), 'minusculas': (97, 122), 'numeros': (48, 57), 'caracteres especiais': [(33, 47),(58, 64), (91, 96), (123, 126)]}
   texto: str = ''
   for k,v in d.items():
@@ -68,7 +91,5 @@ def passWord(d : dict = numChrCategoria()) -> str:
   rd.shuffle(lista)
   return ''.join(lista)
 
-a = passWord()
-print(a)
-
-print('Olá, estou na nova branch')
+# a = passWord()
+# print(a)
