@@ -1,4 +1,3 @@
-from numbers import Number
 import os, random as rd
 
 try: # Teste para implementar randomizações mais protegidas
