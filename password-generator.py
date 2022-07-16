@@ -70,3 +70,5 @@ def passWord(d : dict = numChrCategoria()) -> str:
 
 a = passWord()
 print(a)
+
+print('Olá, estou na nova branch')
